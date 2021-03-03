@@ -13,7 +13,7 @@ import static org.hamcrest.core.Is.is;
 public class UserTest {
     @BeforeClass
     private void setUp(){
-        RestAssured.baseURI = ("http://178.154.249.63/");
+        RestAssured.baseURI = ("http://178.154.208.225/");
     }
 
     @Test
@@ -23,13 +23,13 @@ public class UserTest {
         user.setPassword("test123");
         user.setUsername(RandomStringUtils.randomAlphanumeric(8));
         RestAssured.given().contentType(ContentType.JSON).log().all()
-                .body(user)
+                    .body(user)
                 .when()
-                .post("register")
+                    .post("register")
                 .then().log().all()
-                .assertThat()
-                .statusCode(200)
-                .body("id", is(not(emptyString())));
+                    .assertThat()
+                    .statusCode(200)
+                    .body("id", is(not(emptyString())));
     }
 
     @Test
@@ -39,21 +39,21 @@ public class UserTest {
         user.setPassword("test123");
         user.setUsername(RandomStringUtils.randomAlphanumeric(8));
         RestAssured.given().contentType(ContentType.JSON).log().all()
-                .body(user)
+                    .body(user)
                 .when()
-                .post("register")
+                    .post("register")
                 .then().log().all()
-                .assertThat()
-                .statusCode(200)
-                .body("id", is(not(emptyString())));
+                    .assertThat()
+                    .statusCode(200)
+                    .body("id", is(not(emptyString())));
 
         RestAssured.given().contentType(ContentType.JSON).log().all()
-                .body(user)
+                    .body(user)
                 .when()
-                .post("register")
+                    .post("register")
                 .then().log().all()
-                .assertThat()
-                .statusCode(500);
+                    .assertThat()
+                    .statusCode(500);
     }
 
 }
