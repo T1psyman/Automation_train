@@ -3,12 +3,16 @@ package ru.sbrf.learnqa.soxshop.tests;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+
+import io.restassured.RestAssured;
+import io.restassured.parsing.Parser;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import ru.sbrf.learnqa.soxshop.CardPayload;
-import ru.sbrf.learnqa.soxshop.UserPayload;
+import ru.sbrf.learnqa.soxshop.payload.CardPayload;
+import ru.sbrf.learnqa.soxshop.payload.UserPayload;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.emptyString;
@@ -24,9 +28,9 @@ public class CardTest{
     @Test
     public void testSuccessAddCard() throws InterruptedException {
         UserPayload user = new UserPayload();
-        user.setEmail("g@mail.com");
-        user.setPassword("test123");
-        user.setUsername(RandomStringUtils.randomAlphanumeric(8));
+        user.email("g@mail.com");
+        user.password("test123");
+        user.username(RandomStringUtils.randomAlphanumeric(8));
 
         Response response= RestAssured.given().contentType(ContentType.JSON).log().all()
                 .body(user)
@@ -38,11 +42,7 @@ public class CardTest{
                 .extract().response();
 
         Map<String, String> allCookies = response.getCookies();
-
         String id = response.jsonPath().get("id");
-
-        System.out.print("Куки: " + allCookies);
-
 
         CardPayload card =new CardPayload();
         card.setCcv(RandomStringUtils.randomNumeric(3));
@@ -51,14 +51,13 @@ public class CardTest{
         card.setUserID(id);
 
         RestAssured.given().contentType(ContentType.JSON).log().all()
-                        .cookies(allCookies)
-                        .body(card)
-                    .when()
-                        .post("cards")
-                    .then().log().all()
-                        .assertThat()
-                        .statusCode(200)
-                        .body("id", is(not(emptyString())));   //Не парсится тело??!!!
+                .cookies(allCookies)
+                .body(card)
+            .when()
+                .post("cards")
+            .then().log().all()
+                .assertThat()
+                .statusCode(200)
+                .body("id", is(not(emptyString())));   //Не парсится тело - потому, что возврат в одну строку?!??!?
     }
-
 }

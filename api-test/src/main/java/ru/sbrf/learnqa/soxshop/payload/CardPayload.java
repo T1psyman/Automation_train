@@ -1,4 +1,4 @@
-package ru.sbrf.learnqa.soxshop;
+package ru.sbrf.learnqa.soxshop.payload;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
