@@ -21,6 +21,8 @@ dependencies {
     implementation("io.rest-assured:rest-assured:$restAssuredVersion")
     implementation("org.testng:testng:$testNgVersion")
     implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
+    implementation 'com.github.javafaker:javafaker:1.0.2'
+
 }
 
 

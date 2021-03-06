@@ -7,10 +7,15 @@ import ru.sbrf.learnqa.soxshop.condisions.Condision;
 @RequiredArgsConstructor
 public class AssertableResponse {
 
-    private final Response register;
+    private final Response response;
 
-public void shouldHave(Condision condision){
-    condision.check(register);
-
+public AssertableResponse shouldHave(Condision condision){
+    condision.check(response);
+    return this;
     }
+
+    public <T> T asPojo(Class<T> tclass){
+    return response.as(tclass);
+    }
+
 }
