@@ -1,8 +1,8 @@
-package ru.sbrf.learnqa.soxshop.condisions;
+package ru.sbrf.learnqa.soxshop.conditions;
 
 import io.restassured.response.Response;
 
-public interface Condision {
+public interface Condition {
 
     void check(Response response);
 }

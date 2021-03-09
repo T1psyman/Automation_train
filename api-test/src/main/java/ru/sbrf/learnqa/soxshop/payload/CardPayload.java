@@ -1,6 +1,6 @@
 package ru.sbrf.learnqa.soxshop.payload;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;  //Зачем нужен джексон????
 
 public class CardPayload{
 

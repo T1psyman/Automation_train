@@ -15,7 +15,7 @@ import ru.sbrf.learnqa.soxshop.services.UserApiService;
 
 import java.util.Locale;
 
-import static ru.sbrf.learnqa.soxshop.condisions.Condisions.statusCode;
+import static ru.sbrf.learnqa.soxshop.conditions.Conditions.statusCode;
 
 public class CardTest{
     private final UserApiService userApiService = new UserApiService();
@@ -30,10 +30,10 @@ public class CardTest{
 
   @Test
     public void testSuccessAddCard() {
-      UserPayload user = new UserPayload()
-              .email(faker.internet().emailAddress())
-              .password(faker.internet().password())
-              .username(faker.name().username());
+      UserPayload user = new UserPayload();
+      user.setEmail(faker.internet().emailAddress());
+      user.setPassword(faker.internet().password());
+      user.setUsername(faker.name().username());
       UserRegistrationResponse response = userApiService.registerUser(user)
               .shouldHave(statusCode(200))
               .asPojo(UserRegistrationResponse.class);

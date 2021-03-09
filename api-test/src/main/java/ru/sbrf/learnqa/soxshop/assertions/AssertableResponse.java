@@ -1,16 +1,19 @@
 package ru.sbrf.learnqa.soxshop.assertions;
 
 import io.restassured.response.Response;
-import lombok.RequiredArgsConstructor;
-import ru.sbrf.learnqa.soxshop.condisions.Condision;
+import ru.sbrf.learnqa.soxshop.conditions.Condition;
 
-@RequiredArgsConstructor
+/*@RequiredArgsConstructor*/
 public class AssertableResponse {
-
     private final Response response;
 
-public AssertableResponse shouldHave(Condision condision){
-    condision.check(response);
+    public AssertableResponse(Response response){       //
+        this.response = response;                       //  Это можно заменить аннотацией  RequiredArgsConstructor
+    }                                                   //
+
+
+public AssertableResponse shouldHave(Condition condition){
+    condition.check(response);
     return this;
     }
 

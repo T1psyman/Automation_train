@@ -6,9 +6,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-@Getter
+/*@Getter
 @Setter
-@Accessors(fluent = true)
+@Accessors(fluent = true)  */     //Не понял в какой момент начинает работать эта аннотация - если замутить аннотации гетер и сетер
+
 public class UserPayload{
 
 	@JsonProperty("password")
@@ -17,6 +18,30 @@ public class UserPayload{
 	private String email;
 	@JsonProperty("username")
 	private String username;
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 	@Override
  	public String toString(){
