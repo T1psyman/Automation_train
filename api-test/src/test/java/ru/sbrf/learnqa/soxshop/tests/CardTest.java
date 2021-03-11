@@ -4,9 +4,9 @@ import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.RandomUtils;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import ru.sbrf.learnqa.soxshop.generationdata.GenerationExpiryData;
 import ru.sbrf.learnqa.soxshop.payload.CardPayload;
 import ru.sbrf.learnqa.soxshop.payload.UserPayload;
 import ru.sbrf.learnqa.soxshop.responses.UserRegistrationResponse;
@@ -21,7 +21,8 @@ public class CardTest{
     private final UserApiService userApiService = new UserApiService();
     private final Faker faker = new Faker(new Locale("ru"));
     private final CardApiService cardApiService = new CardApiService();
-
+    private final GenerationExpiryData generationExpiryDataMonth = new GenerationExpiryData();
+    private final GenerationExpiryData generationExpiryDataYear = new GenerationExpiryData();
 
     @BeforeClass
     public void setUp(){
@@ -45,7 +46,7 @@ public class CardTest{
 
         CardPayload card = new CardPayload();
         card.setCcv(RandomStringUtils.randomNumeric(3)); // В ДОКУМЕНТАЦИИ faker НЕ НАШЕЛ генерацию cvv кода
-        card.setExpires(RandomUtils.nextInt(1,12) + "/" + RandomStringUtils.randomNumeric(2));
+        card.setExpires(generationExpiryDataMonth.generationExpiryDataMonth() + "/" + generationExpiryDataYear.generationExpiryDataYear());
         card.setLongNum(faker.finance().creditCard());
         card.setUserID(response.getId());
 
@@ -65,4 +66,5 @@ public class CardTest{
                 .statusCode(200)
                 .body("id", is(not(emptyString()))); */  //Не парсится тело - потому, что возврат в одну строку?!??!?
     }
+
 }
